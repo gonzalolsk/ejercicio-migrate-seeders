@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= locals.product != undefined ? "Edit" : "Create" %></title>
+</head>
+<body>
+    <form 
+    action="<%= locals.product != undefined ? "/update/"+product.id : "/save" %>"
+    method="post">
+        <fieldset>
+            <label for="name">name</label>
+            <input type="text" id="name" name="name" placeholder="name" value="<%= locals.product != undefined ? product.name : null %>">
+        </fieldset>
+        <fieldset>
+            <label for="brand">brand</label>
+            <select name="brand" id="brand">
+                <option value="">Select brand</option>
+                <% brands.forEach(brand => { %>
+                    <option value="<%= brand.id %>">
+                    <%= brand.name %> 
+                    </option>
+                <% }) %>
+            </select>
+        </fieldset>
+        <fieldset>
+            <label for="categories">categories</label>
+                <% categories.forEach(category=> { %>
+                    <label for="<%= category.id %>">
+                    <input type="checkbox" name="categories" id="<%= category.id %>" value="<%= category.id %>" >
+                    <%= category.name %>
+                    </label>
+                <% }) %>
+        </fieldset>
+        <fieldset>
+            <button type="submit">Enviar</button>
+        </fieldset>
+    </form>
+
+</body>
+</html>
